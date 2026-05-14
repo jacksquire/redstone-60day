@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redstone Manufacturing — 60-Day Sprint Plan | Outrider Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --card: #ffffff;
+    --ink: #16140f;
+    --ink-soft: #4a4640;
+    --rule: #d9d1c2;
+    --rust: #a0341b;
+    --rust-dark: #7a2812;
+    --sand: #b5a893;
+    --cream: #ede5d3;
+    --green: #2d5f3f;
+    --amber: #b8821a;
+    --red: #8b2419;
+    --blue: #2d4866;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 56px 48px 96px; }
+  .mono { font-family: 'JetBrains Mono', 'SF Mono', monospace; }
+
+  /* Header */
+  header.masthead {
+    border-top: 4px solid var(--ink);
+    padding-top: 28px;
+    margin-bottom: 56px;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 68px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    font-variation-settings: "opsz" 144;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--rust);
+    font-weight: 300;
+  }
+  .deck {
+    font-size: 20px;
+    line-height: 1.5;
+    max-width: 760px;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+  }
+  .meta-strip {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .meta-strip > div { display: flex; flex-direction: column; gap: 4px; }
+  .meta-strip .label {
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+  }
+  .meta-strip .value { color: var(--ink); font-weight: 600; font-size: 14px; }
+
+  /* Exec summary */
+  .exec {
+    margin: 56px 0;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 56px;
+  }
+  .exec .lhs {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 96;
+  }
+  .exec .lhs em { color: var(--rust); font-style: italic; }
+  .exec .rhs p {
+    margin: 0 0 18px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .exec .rhs p:last-child { margin-bottom: 0; }
+  .exec .rhs strong { color: var(--rust); font-weight: 600; }
+
+  /* Totals bar */
+  .totals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 56px 0 64px;
+    border: 1px solid var(--ink);
+    background: var(--card);
+  }
+  .totals .cell {
+    padding: 32px 28px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .totals .cell:last-child { border-right: none; }
+  .totals .cell.scope::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    height: 4px;
+    background: var(--ink);
+    width: 100%;
+  }
+  .totals .cell.scope-add::after { background: var(--rust); }
+  .totals .cell.total::after { background: var(--ink); height: 6px; }
+  .totals .num {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 12px;
+  }
+  .totals .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .totals .sub {
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+  .totals .cell.total .num { color: var(--rust); font-weight: 400; }
+  .totals .cell.total .tag { color: var(--rust); }
+
+  /* Section */
+  section { margin-bottom: 80px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 8px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--rust);
+    font-weight: 600;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 96;
+  }
+  .section-count {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 880px;
+    margin: 22px 0 32px;
+  }
+  .lede em { color: var(--rust); font-style: italic; }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    font-size: 13.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th {
+    background: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    font-weight: 600;
+    border-bottom: 2px solid var(--ink);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #faf6ee; }
+  td.num, th.num { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-align: right; }
+  td.slug { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink); }
+  td.id { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft); width: 36px; }
+
+  /* Pills */
+  .pill {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+  .pill.easy { background: #e2efdb; color: var(--green); }
+  .pill.med { background: #f4e6c4; color: var(--amber); }
+  .pill.hard { background: #f4d4cd; color: var(--red); }
+  .pill.crit { background: var(--rust-dark); color: var(--bg); }
+  .pill.high { background: var(--rust); color: var(--bg); }
+  .pill.med-pri { background: var(--amber); color: white; }
+  .pill.low { background: var(--sand); color: var(--ink); }
+  .pill.scope { background: var(--blue); color: var(--bg); }
+  .pill.p0 { background: var(--ink); color: var(--bg); }
+  .pill.p1 { background: var(--rust); color: var(--bg); }
+
+  /* Callout */
+  .callout {
+    background: var(--cream);
+    border-left: 3px solid var(--rust);
+    padding: 22px 26px;
+    margin: 28px 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .callout strong { color: var(--rust); }
+  .callout .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  /* 5x5 matrix */
+  .matrix-wrap { background: var(--card); border: 1px solid var(--rule); padding: 26px; margin-bottom: 24px; }
+  .matrix-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .matrix {
+    display: grid;
+    grid-template-columns: 140px repeat(5, 1fr);
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+  .matrix .cell {
+    padding: 11px 9px;
+    background: var(--bg);
+    min-height: 68px;
+    line-height: 1.35;
+  }
+  .matrix .corner { background: var(--ink); color: var(--bg); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; padding: 12px 10px; display: flex; align-items: center; }
+  .matrix .col-head {
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 10px;
+    padding: 12px 10px;
+    line-height: 1.25;
+  }
+  .matrix .row-head {
+    background: var(--rust);
+    color: var(--bg);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 10.5px;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.3;
+  }
+  .matrix .row-head small { font-weight: 400; opacity: 0.8; font-size: 9px; margin-top: 3px; }
+  .matrix .cell strong { color: var(--ink); display: block; margin-bottom: 3px; font-weight: 600; }
+  .matrix .cell small { color: var(--ink-soft); font-size: 9.5px; }
+
+  /* Timeline */
+  .timeline { background: var(--card); border: 1px solid var(--rule); padding: 0; margin-top: 16px; }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-week {
+    background: var(--cream);
+    padding: 18px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    font-weight: 600;
+    border-right: 1px solid var(--rule);
+  }
+  .tl-content { padding: 18px 22px; font-size: 14.5px; line-height: 1.55; }
+  .tl-content strong { color: var(--ink); }
+
+  /* Milestones */
+  .milestone-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--ink);
+    margin-top: 24px;
+  }
+  .milestone-card {
+    padding: 28px 26px;
+    border-right: 1px solid var(--rule);
+    background: var(--card);
+    position: relative;
+  }
+  .milestone-card:last-child { border-right: none; }
+  .milestone-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    height: 3px;
+    width: 100%;
+    background: var(--rust);
+  }
+  .milestone-card .stage {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--rust);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .milestone-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    line-height: 1.15;
+    font-weight: 400;
+    margin: 0 0 14px;
+    font-variation-settings: "opsz" 72;
+  }
+  .milestone-card ul {
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+  }
+  .milestone-card li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: var(--ink-soft);
+  }
+  .milestone-card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    top: 2px;
+  }
+  .milestone-card li strong { color: var(--ink); }
+
+  /* Decisions */
+  .decision-list { background: var(--card); border: 1px solid var(--rule); padding: 0; }
+  .decision-list .item {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .decision-list .item:last-child { border-bottom: none; }
+  .decision-list .num-circle {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--rust);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--rust);
+  }
+  .decision-list .q { font-size: 15.5px; line-height: 1.55; }
+  .decision-list .q strong { display: block; color: var(--ink); margin-bottom: 6px; font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; }
+  .decision-list .q span { color: var(--ink-soft); font-size: 14.5px; }
+  .decision-list .options {
+    margin-top: 10px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .decision-list .options li {
+    padding: 4px 0 4px 18px;
+    position: relative;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .decision-list .options li::before {
+    content: "○";
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+  }
+
+  /* Footer signature */
+  .footer-sig {
+    margin-top: 96px;
+    padding-top: 36px;
+    border-top: 3px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+  }
+  .footer-sig em {
+    font-family: 'Fraunces', serif;
+    text-transform: none;
+    font-style: italic;
+    color: var(--rust);
+    font-size: 20px;
+    letter-spacing: 0;
+  }
+
+  /* Considerations cards */
+  .consider-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .consider-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 24px 26px;
+    border-left: 3px solid var(--rust);
+  }
+  .consider-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .consider-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    font-variation-settings: "opsz" 72;
+  }
+  .consider-card p { font-size: 14.5px; line-height: 1.55; margin: 0 0 8px; color: var(--ink-soft); }
+  .consider-card p strong { color: var(--ink); }
+
+  /* Inline emphasis */
+  .ink { color: var(--ink); font-weight: 500; }
+  .rust { color: var(--rust); }
+
+  /* Appendix styles */
+  .appendix-subhead {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 48px 0 6px;
+    letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 72;
+    color: var(--ink);
+  }
+  .appendix-subhead:first-of-type { margin-top: 32px; }
+  .appendix-subhead .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--rust);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-left: 12px;
+    text-transform: uppercase;
+  }
+  .appendix-subhead-desc {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 880px;
+  }
+  table.compact th, table.compact td {
+    padding: 8px 12px;
+    font-size: 12.5px;
+  }
+  table.compact th {
+    font-size: 9.5px;
+  }
+  table.compact td.kw {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+  }
+  .universe-link {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid var(--ink);
+    transition: background 0.2s;
+  }
+  .universe-link:hover { background: var(--rust); border-color: var(--rust); }
+
+  /* TOC */
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 24px 28px;
+    margin: 0 0 48px;
+  }
+  .toc .toc-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--rust);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .toc ol {
+    columns: 2;
+    column-gap: 36px;
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+    counter-reset: toc;
+  }
+  .toc li {
+    padding: 6px 0;
+    font-size: 14.5px;
+    counter-increment: toc;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--rust);
+    font-weight: 600;
+  }
+  .toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border 0.2s; }
+  .toc a:hover { border-bottom: 1px solid var(--rust); }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 32px 20px; }
+    h1 { font-size: 44px; }
+    .totals { grid-template-columns: 1fr; }
+    .totals .cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .exec { grid-template-columns: 1fr; gap: 24px; }
+    .exec .lhs { font-size: 22px; }
+    .milestone-grid { grid-template-columns: 1fr; }
+    .milestone-card { border-right: none; border-bottom: 1px solid var(--rule); }
+    .matrix { grid-template-columns: 100px repeat(5, 1fr); font-size: 9.5px; }
+    .consider-grid { grid-template-columns: 1fr; }
+    .toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="masthead">
+  <div class="eyebrow">Prepared by Outrider Digital · For Redstone Manufacturing</div>
+  <h1>60-Day Sprint <em>—</em><br>Content Plan</h1>
+  <p class="deck">
+    Following our May 7 strategy call, this document maps the full 60-day content build:
+    every existing page being optimized, every new page being created, the production schedule,
+    and what success looks like at each milestone of the engagement.
+  </p>
+  <div class="meta-strip">
+    <div><span class="label">Sprint Window</span><span class="value">Apr 28 — Jun 27, 2026</span></div>
+    <div><span class="label">Site Build Partner</span><span class="value">Kaz Studio</span></div>
+    <div><span class="label">Prepared By</span><span class="value">Jack Squire — Outrider Digital</span></div>
+    <div><span class="label">Document Version</span><span class="value">v1 · May 13, 2026</span></div>
+  </div>
+</header>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ol>
+    <li><a href="#summary">Executive Summary</a></li>
+    <li><a href="#block1">Existing Page Optimization (25 pages)</a></li>
+    <li><a href="#block2">New Service Pillar Pages (7 pages)</a></li>
+    <li><a href="#block3">Country + Service Expansion (13 pages)</a></li>
+    <li><a href="#block4a">Material Content Refresh (10 pages)</a></li>
+    <li><a href="#block4b">US Service Area Coverage (26 pages)</a></li>
+    <li><a href="#block4c">Industry Vertical Pages (4 pages)</a></li>
+    <li><a href="#milestones">What Success Looks Like</a></li>
+    <li><a href="#considerations">Considerations &amp; Dependencies</a></li>
+    <li><a href="#decisions">Decisions We Need From You</a></li>
+    <li><a href="#universe">Appendix: Keyword Universe</a></li>
+  </ol>
+</div>
+
+<!-- EXEC SUMMARY -->
+<section id="summary">
+  <div class="section-head">
+    <span class="section-num">01 / SUMMARY</span>
+    <h2>Executive summary</h2>
+  </div>
+
+  <div class="exec">
+    <div class="lhs">
+      Two parallel workstreams. <em>Foundation recovery</em> on the pages you have. <em>Commercial growth</em> on the pages you need.
+    </div>
+    <div class="rhs">
+      <p>Your traffic decline over the past twelve months is real and substantial — but the
+      majority of what was lost was informational reference traffic from material specification
+      pages (Q345, ADC12, ST37, etc.), much of it from engineers overseas. That traffic is
+      worth recovering on its own merits, but it was never the lead engine.</p>
+      <p>The <strong>commercial layer</strong> of your site — the service hubs, country pages,
+      and industry verticals that drive actual buyer inquiry — has been thin and under-ranked
+      for years. The 60-day sprint rebuilds that layer while also addressing the recoverable
+      portion of the lost traffic.</p>
+      <p>The contracted scope is 45 pages. We're delivering 85, structured into six blocks.
+      Every additional page is included at no extra cost and earns its place by either ranking
+      inside the engagement window or establishing positioning that converts in the months that
+      follow.</p>
+    </div>
+  </div>
+
+  <!-- TOTALS -->
+  <div class="totals">
+    <div class="cell scope">
+      <div class="tag">Contracted Deliverables</div>
+      <div class="num">45</div>
+      <div class="sub">25 existing page optimizations · 7 new service pillars · 13 country + service pages</div>
+    </div>
+    <div class="cell scope-add">
+      <div class="tag">Additional Initiatives</div>
+      <div class="num">40</div>
+      <div class="sub">10 material content refreshes · 26 US service-area pages · 4 industry vertical pages</div>
+    </div>
+    <div class="cell total">
+      <div class="tag">Total Pages Delivered</div>
+      <div class="num">85</div>
+      <div class="sub">Across the existing site and the new build, delivered inside the 60-day engagement window</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 1 -->
+<section id="block1">
+  <div class="section-head">
+    <span class="section-num">02 / DELIVERABLE</span>
+    <h2>Existing page optimization</h2>
+    <span class="section-count">25 pages · Contracted</span>
+  </div>
+  <p class="lede">
+    Twenty-five existing pages selected against the actual Google Search Console traffic data:
+    one homepage, seven service hubs, two service spokes, and fifteen country pages. Together
+    these are the pages with the highest recovery leverage — most are stuck at positions 25–60
+    despite holding tens of thousands of impressions each. Moving them up the page should
+    produce visible click recovery in weeks 6–8.
+  </p>
+  <p class="lede">
+    <em>Work performed on each page:</em> title rewrite, meta description, H1/H2 restructure,
+    Service or LocalBusiness schema, hub-to-spoke-to-country internal linking, FAQ block
+    targeting People Also Ask, image alt and filename normalization, and content gap fill
+    against the top three SERP competitors.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="id">#</th>
+        <th>URL</th>
+        <th>Page Type</th>
+        <th class="num">Current Pos</th>
+        <th class="num">16-Mo Clicks</th>
+        <th class="num">16-Mo Imp</th>
+        <th>Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="id">01</td><td class="slug">/</td><td>Homepage</td><td class="num">40.0</td><td class="num">3,460</td><td class="num">67,808</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">02</td><td class="slug">/cnc-machining-services/</td><td>Service Hub</td><td class="num">56.9</td><td class="num">83</td><td class="num">23,975</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">03</td><td class="slug">/sheet-metal-fabrication-services/</td><td>Service Hub</td><td class="num">54.4</td><td class="num">34</td><td class="num">11,564</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">04</td><td class="slug">/plastic-injection-molding-services/</td><td>Service Hub</td><td class="num">65.8</td><td class="num">59</td><td class="num">19,377</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">05</td><td class="slug">/investment-casting-services/</td><td>Service Hub</td><td class="num">46.8</td><td class="num">130</td><td class="num">109,422</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">06</td><td class="slug">/sand-casting-services/</td><td>Service Hub</td><td class="num">36.4</td><td class="num">115</td><td class="num">94,207</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">07</td><td class="slug">/metal-injection-molding-services/</td><td>Service Hub</td><td class="num">36.4</td><td class="num">54</td><td class="num">12,390</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">08</td><td class="slug">/die-casting-services/</td><td>Service Hub</td><td class="num">46.4</td><td class="num">78</td><td class="num">46,447</td><td><span class="pill crit">critical</span></td></tr>
+      <tr><td class="id">09</td><td class="slug">/aluminum-die-casting-manufacturer/</td><td>Service Spoke</td><td class="num">51.7</td><td class="num">60</td><td class="num">67,689</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">10</td><td class="slug">/high-pressure-die-casting/</td><td>Service Spoke</td><td class="num">56.4</td><td class="num">36</td><td class="num">3,632</td><td><span class="pill med-pri">medium</span></td></tr>
+      <tr><td class="id">11</td><td class="slug">/mexico-foundries/</td><td>Country Spoke</td><td class="num">23.1</td><td class="num">522</td><td class="num">30,549</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">12</td><td class="slug">/india-investment-casting/</td><td>Country Spoke</td><td class="num">26.2</td><td class="num">476</td><td class="num">57,453</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">13</td><td class="slug">/cnc-machining-mexico/</td><td>Country Spoke</td><td class="num">34.9</td><td class="num">453</td><td class="num">23,427</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">14</td><td class="slug">/india-foundry/</td><td>Country Spoke</td><td class="num">17.1</td><td class="num">447</td><td class="num">34,311</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">15</td><td class="slug">/china-sheet-metal/</td><td>Country Spoke</td><td class="num">16.3</td><td class="num">376</td><td class="num">73,831</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">16</td><td class="slug">/india-metal-injection-molding-mim/</td><td>Country Spoke</td><td class="num">33.7</td><td class="num">356</td><td class="num">33,303</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">17</td><td class="slug">/india-sand-casting/</td><td>Country Spoke</td><td class="num">36.7</td><td class="num">356</td><td class="num">28,825</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">18</td><td class="slug">/india-cnc-machining/</td><td>Country Spoke</td><td class="num">30.9</td><td class="num">317</td><td class="num">72,660</td><td><span class="pill high">high</span></td></tr>
+      <tr><td class="id">19</td><td class="slug">/mexico-sheet-metal-manufacturer/</td><td>Country Spoke</td><td class="num">35.4</td><td class="num">297</td><td class="num">28,314</td><td><span class="pill med-pri">medium</span></td></tr>
+      <tr><td class="id">20</td><td class="slug">/casting-foundry-in-brazil/</td><td>Country Spoke</td><td class="num">16.5</td><td class="num">286</td><td class="num">13,974</td><td><span class="pill med-pri">medium</span></td></tr>
+      <tr><td class="id">21</td><td class="slug">/die-casting-mexico/</td><td>Country Spoke</td><td class="num">38.8</td><td class="num">282</td><td class="num">24,205</td><td><span class="pill med-pri">medium</span></td></tr>
+      <tr><td class="id">22</td><td class="slug">/cast-iron-foundry-china/</td><td>Country Spoke</td><td class="num">34.8</td><td class="num">250</td><td class="num">38,622</td><td><span class="pill med-pri">medium</span></td></tr>
+      <tr><td class="id">23</td><td class="slug">/india-die-casting/</td><td>Country Spoke</td><td class="num">25.8</td><td class="num">233</td><td class="num">20,854</td><td><span class="pill med-pri">medium</span></td></tr>
+      <tr><td class="id">24</td><td class="slug">/china-investment-casting/</td><td>Country Spoke</td><td class="num">17.7</td><td class="num">224</td><td class="num">52,815</td><td><span class="pill med-pri">medium</span></td></tr>
+      <tr><td class="id">25</td><td class="slug">/mexico-plastic-injection-molding/</td><td>Country Spoke</td><td class="num">22.7</td><td class="num">224</td><td class="num">25,340</td><td><span class="pill med-pri">medium</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BLOCK 2 -->
+<section id="block2">
+  <div class="section-head">
+    <span class="section-num">03 / DELIVERABLE</span>
+    <h2>New service pillar pages</h2>
+    <span class="section-count">7 pages · Contracted</span>
+  </div>
+  <p class="lede">
+    Seven new service pillars built around the priorities you identified on the strategy call:
+    the finishing cluster (powder coat, anodize, electroplate, chromate) and the sheet metal
+    sub-services (welding, laser cutting, plasma cutting, stamping, tube bending, wire forming).
+    Each pillar gets full hub treatment — 1,500–2,500 words, schema markup, internal linking
+    to relevant existing spokes and country pages, FAQ block, structured capability callouts,
+    and conversion path mapping.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="id">#</th>
+        <th>Pillar Page</th>
+        <th>Primary Keyword</th>
+        <th class="num">Monthly Vol</th>
+        <th class="num">Difficulty</th>
+        <th>60-Day Ranking Outlook</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="id">01</td><td><strong>Welding Services</strong></td><td class="slug">welding services</td><td class="num">1,900</td><td class="num">10</td><td><span class="pill easy">strong</span> — low difficulty, hub for MIG/TIG spokes</td></tr>
+      <tr><td class="id">02</td><td><strong>Laser Cutting Service</strong></td><td class="slug">laser cutting service</td><td class="num">2,400</td><td class="num">39</td><td><span class="pill hard">longer-term</span> — high volume, competitive SERP, foundation for tube laser</td></tr>
+      <tr><td class="id">03</td><td><strong>Metal Finishing Services</strong></td><td class="slug">metal finishing services</td><td class="num">480</td><td class="num">46</td><td><span class="pill hard">longer-term</span> — umbrella hub for the finishing cluster</td></tr>
+      <tr><td class="id">04</td><td><strong>Powder Coating Services</strong></td><td class="slug">powder coating services</td><td class="num">3,600</td><td class="num">41</td><td><span class="pill hard">longer-term</span> — highest-volume finish, biggest long-term asset</td></tr>
+      <tr><td class="id">05</td><td><strong>Plasma Cutting Services</strong></td><td class="slug">plasma cutting services</td><td class="num">480</td><td class="num">15</td><td><span class="pill easy">strong</span> — low difficulty, fast indexing</td></tr>
+      <tr><td class="id">06</td><td><strong>Tube Bending Services</strong></td><td class="slug">tube bending services</td><td class="num">480</td><td class="num">20</td><td><span class="pill med">good</span> — moderate difficulty, achievable</td></tr>
+      <tr><td class="id">07</td><td><strong>Metal Stamping Services</strong></td><td class="slug">metal stamping services</td><td class="num">720</td><td class="num">37</td><td><span class="pill med">good</span> — covers progressive and single die stamping</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label">Alternates available</span>
+    Additional pillar candidates discussed on the call (Anodizing Services, Electroplating
+    Services, Waterjet Cutting Services, MIG Welding Services, TIG Welding Services) can be
+    swapped into the seven listed above or added as supporting spoke pages under existing
+    pillars. Happy to adjust the mix based on your priorities.
+  </div>
+</section>
+
+<!-- BLOCK 3 -->
+<section id="block3">
+  <div class="section-head">
+    <span class="section-num">04 / DELIVERABLE</span>
+    <h2>Country + service expansion</h2>
+    <span class="section-count">13 pages · Contracted</span>
+  </div>
+  <p class="lede">
+    Per your direction on the call — "we should just do everything in every country now" —
+    these thirteen pages fill the gaps in the existing country grid and extend coverage into
+    Vietnam and Malaysia, where Redstone currently has zero presence. Each page uses a
+    consistent template: hero, in-country capabilities and processes, materials, partner
+    network framing, quality control standards, logistics and shipping to the US,
+    certifications, lead times, FAQ, and related-country internal links. 800–1,200 words each
+    with full schema implementation.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="id">#</th>
+        <th>Page Title</th>
+        <th>Country</th>
+        <th>Service</th>
+        <th class="num">Monthly Vol</th>
+        <th class="num">Difficulty</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="id">01</td><td>Aluminum CNC Machining Vietnam</td><td>Vietnam</td><td>CNC</td><td class="num">210</td><td class="num">14</td><td>New country coverage</td></tr>
+      <tr><td class="id">02</td><td>CNC Machining Vietnam</td><td>Vietnam</td><td>CNC</td><td class="num">170</td><td class="num">20</td><td>New country coverage</td></tr>
+      <tr><td class="id">03</td><td>China Die Casting</td><td>China</td><td>Die Casting</td><td class="num">110</td><td class="num">18</td><td>Grid gap in existing country</td></tr>
+      <tr><td class="id">04</td><td>China CNC Turning</td><td>China</td><td>CNC Turning</td><td class="num">90</td><td class="num">15</td><td>Grid gap in existing country</td></tr>
+      <tr><td class="id">05</td><td>CNC Lathe China</td><td>China</td><td>CNC Lathe</td><td class="num">90</td><td class="num">10</td><td>Grid gap in existing country</td></tr>
+      <tr><td class="id">06</td><td>Plastic Injection Molding Malaysia</td><td>Malaysia</td><td>PIM</td><td class="num">70</td><td class="num">31</td><td>New country coverage</td></tr>
+      <tr><td class="id">07</td><td>Precision Die Casting Malaysia</td><td>Malaysia</td><td>Die Casting</td><td class="num">70</td><td class="num">25</td><td>New country coverage</td></tr>
+      <tr><td class="id">08</td><td>Sheet Metal Fabrication China</td><td>China</td><td>Sheet Metal</td><td class="num">50</td><td class="num">17</td><td>Grid gap in existing country</td></tr>
+      <tr><td class="id">09</td><td>Outsource Die Casting Vietnam</td><td>Vietnam</td><td>Die Casting</td><td class="num">50</td><td class="num">0</td><td>New country coverage</td></tr>
+      <tr><td class="id">10</td><td>Sheet Metal Fabrication India</td><td>India</td><td>Sheet Metal</td><td class="num">40</td><td class="num">4</td><td>Grid gap in existing country</td></tr>
+      <tr><td class="id">11</td><td>Mexico Investment Casting</td><td>Mexico</td><td>Investment</td><td class="num">20</td><td class="num">0</td><td>Specifically requested on the call</td></tr>
+      <tr><td class="id">12</td><td>India Plastic Injection Molding</td><td>India</td><td>PIM</td><td class="num">20</td><td class="num">0</td><td>Grid gap in existing country</td></tr>
+      <tr><td class="id">13</td><td>Brazil Foundry</td><td>Brazil</td><td>Foundry</td><td class="num">20</td><td class="num">0</td><td>Grid gap in existing country</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BLOCK 4A -->
+<section id="block4a">
+  <div class="section-head">
+    <span class="section-num">05 / INITIATIVE</span>
+    <h2>Material content refresh</h2>
+    <span class="section-count">10 pages · No additional cost</span>
+  </div>
+  <p class="lede">
+    Above the contracted scope at no additional cost. These ten pages drove <span class="ink">66,407 clicks</span>
+    over the past 16 months — roughly <em>64% of all historical traffic</em> to the site.
+    They still rank on page one for some material specification queries, but click-through has
+    eroded significantly. They have URL history, established backlinks, and prior indexing — which
+    makes them the only pages on the site with a realistic recovery shot inside the 60-day
+    engagement window.
+  </p>
+  <p class="lede">
+    Importantly, these pages currently have <em>zero internal links to your commercial pages</em>.
+    Adding those routes — sending an engineer reading about Q345 steel to your China die casting
+    page, for example — converts informational visits into commercial visibility for the first
+    time. The refresh treatment adds 2026 data updates, structured property tables, TechArticle
+    and FAQPage schema, and the internal CTA paths.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="id">#</th>
+        <th>URL</th>
+        <th class="num">Current Pos</th>
+        <th class="num">16-Mo Clicks</th>
+        <th class="num">16-Mo Imp</th>
+        <th>Refresh Focus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="id">01</td><td class="slug">/st37-equivalent-materials-metal-specifications/</td><td class="num">6.4</td><td class="num">13,371</td><td class="num">277,874</td><td>Schema, property tables, internal CTA routing</td></tr>
+      <tr><td class="id">02</td><td class="slug">/adc12-aluminum/</td><td class="num">5.5</td><td class="num">11,621</td><td class="num">266,413</td><td>Data refresh, supplier index, link to die casting hubs</td></tr>
+      <tr><td class="id">03</td><td class="slug">/ss400-equivalent-materials-metal-specifications/</td><td class="num">6.2</td><td class="num">10,008</td><td class="num">287,535</td><td>Schema, equivalence table refresh, internal links to sheet metal + CNC</td></tr>
+      <tr><td class="id">04</td><td class="slug">/q235-steel/</td><td class="num">5.1</td><td class="num">9,385</td><td class="num">265,820</td><td>Schema, refresh, internal links to China services</td></tr>
+      <tr><td class="id">05</td><td class="slug">/q355-steel/</td><td class="num">6.0</td><td class="num">7,682</td><td class="num">129,425</td><td>Schema, refresh, internal links to China services</td></tr>
+      <tr><td class="id">06</td><td class="slug">/q345-steel/</td><td class="num">4.7</td><td class="num">6,399</td><td class="num">135,666</td><td>Schema, refresh, internal links to China services</td></tr>
+      <tr><td class="id">07</td><td class="slug">/42crmo-equivalent-materials-metal-specifications/</td><td class="num">10.1</td><td class="num">4,283</td><td class="num">140,331</td><td>Schema, refresh, position recovery (page 2 → page 1)</td></tr>
+      <tr><td class="id">08</td><td class="slug">/42crmo4-equivalent-materials-metal-specifications/</td><td class="num">9.5</td><td class="num">3,243</td><td class="num">217,352</td><td>Schema, refresh, CTR optimization</td></tr>
+      <tr><td class="id">09</td><td class="slug">/1020-steel-equivalent-materials-metal-specifications/</td><td class="num">10.0</td><td class="num">2,151</td><td class="num">139,877</td><td>Schema, refresh, position recovery</td></tr>
+      <tr><td class="id">10</td><td class="slug">/6061-t6-equivalent-materials-metal-specifications/</td><td class="num">16.3</td><td class="num">1,900</td><td class="num">285,415</td><td>Heavy refresh — 285k impressions at position 16 is the largest unrealized click pool on the site</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BLOCK 4B -->
+<section id="block4b">
+  <div class="section-head">
+    <span class="section-num">06 / INITIATIVE</span>
+    <h2>US service area coverage</h2>
+    <span class="section-count">26 pages · No additional cost</span>
+  </div>
+  <p class="lede">
+    Above the contracted scope at no additional cost. Building on your point about the Seattle
+    five-axis facility being a unique US capability worth surfacing, we're structuring a
+    service-area test: one parent hub (<em>US Manufacturing Services</em>) linking to a 5×5
+    matrix of city spokes. Five services across five major US industrial markets — chosen for
+    buyer concentration and breadth of manufacturing demand rather than any single vertical.
+  </p>
+  <p class="lede">
+    Seattle is the only city with an actual Redstone facility — the other four are positioned
+    as <em>service coverage areas</em>, not physical locations. Each city page references the
+    Seattle facility as the US production anchor and positions Redstone as a domestic + offshore
+    sourcing partner for buyers in that market.
+  </p>
+
+  <div class="matrix-wrap">
+    <div class="matrix-title">Service × Location Matrix (25 spoke pages + 1 hub)</div>
+    <div class="matrix">
+      <div class="corner">SERVICE →<br>CITY ↓</div>
+      <div class="col-head">CNC Machining</div>
+      <div class="col-head">Precision Machining</div>
+      <div class="col-head">Sheet Metal Fab</div>
+      <div class="col-head">Metal Fabrication</div>
+      <div class="col-head">Manufacturing Services</div>
+
+      <div class="row-head">Seattle, WA<small>5-axis facility · US anchor</small></div>
+      <div class="cell"><strong>/cnc-machining-seattle/</strong><small>Anchor page · 90 vol · KD 7</small></div>
+      <div class="cell"><strong>/precision-machining-seattle/</strong><small>High-tolerance machining focus</small></div>
+      <div class="cell"><strong>/sheet-metal-fabrication-seattle/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/metal-fabrication-seattle/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/manufacturing-services-seattle/</strong><small>Broad capability page</small></div>
+
+      <div class="row-head">Los Angeles, CA<small>major industrial market</small></div>
+      <div class="cell"><strong>/cnc-machining-los-angeles/</strong><small>West Coast industrial cluster</small></div>
+      <div class="cell"><strong>/precision-machining-los-angeles/</strong><small>High-tolerance machining focus</small></div>
+      <div class="cell"><strong>/sheet-metal-fabrication-los-angeles/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/metal-fabrication-los-angeles/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/manufacturing-services-los-angeles/</strong><small>Broad capability page</small></div>
+
+      <div class="row-head">Chicago, IL<small>midwest manufacturing hub</small></div>
+      <div class="cell"><strong>/cnc-machining-chicago/</strong><small>Largest Midwest industrial base</small></div>
+      <div class="cell"><strong>/precision-machining-chicago/</strong><small>Industrial precision focus</small></div>
+      <div class="cell"><strong>/sheet-metal-fabrication-chicago/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/metal-fabrication-chicago/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/manufacturing-services-chicago/</strong><small>Broad capability page</small></div>
+
+      <div class="row-head">Phoenix, AZ<small>growing manufacturing market</small></div>
+      <div class="cell"><strong>/cnc-machining-phoenix/</strong><small>Expanding industrial base</small></div>
+      <div class="cell"><strong>/precision-machining-phoenix/</strong><small>Semiconductor-grade tolerances</small></div>
+      <div class="cell"><strong>/sheet-metal-fabrication-phoenix/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/metal-fabrication-phoenix/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/manufacturing-services-phoenix/</strong><small>Broad capability page</small></div>
+
+      <div class="row-head">Dallas, TX<small>broad manufacturing + logistics</small></div>
+      <div class="cell"><strong>/cnc-machining-dallas/</strong><small>Texas industrial cluster</small></div>
+      <div class="cell"><strong>/precision-machining-dallas/</strong><small>High-tolerance machining focus</small></div>
+      <div class="cell"><strong>/sheet-metal-fabrication-dallas/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/metal-fabrication-dallas/</strong><small>Service-coordination framing</small></div>
+      <div class="cell"><strong>/manufacturing-services-dallas/</strong><small>Broad capability page</small></div>
+    </div>
+  </div>
+
+  <p class="lede" style="margin-top:8px;">
+    Parent hub: <span class="ink mono">/us-manufacturing-services/</span> captures broader
+    intent ("US CNC machining," "US manufacturing partner," "domestic plus offshore sourcing")
+    and routes traffic to the 25 city spokes using a hub-and-spoke internal linking model
+    identical to the country grid.
+  </p>
+
+  <div class="callout">
+    <span class="label">Important — How we're measuring this initiative</span>
+    US city pages are a category that typically requires 4–6 months minimum to show meaningful
+    local SEO signal. The 60-day engagement window is below that floor, and four of the five
+    cities have no physical Redstone presence to anchor local-pack ranking. <strong>We're not
+    measuring these as a 60-day result.</strong> The test inside this engagement is whether
+    the pages <strong>(a)</strong> index cleanly, <strong>(b)</strong> begin accumulating
+    impressions for branded + city queries by day 60, and <strong>(c)</strong> show early
+    ranking signal that justifies further investment. Material click recovery and lead
+    generation in this window will come from the other deliverable blocks. The US service-area
+    work is a positioning bet whose payoff arrives in months 3–6, supported by phase 2 local
+    citations, Google Business Profile work, and local backlink building if signal warrants.
+  </div>
+</section>
+
+<!-- BLOCK 4C -->
+<section id="block4c">
+  <div class="section-head">
+    <span class="section-num">07 / INITIATIVE</span>
+    <h2>Industry vertical pages</h2>
+    <span class="section-count">4 pages · No additional cost</span>
+  </div>
+  <p class="lede">
+    Above the contracted scope at no additional cost. Four pages targeting the higher-margin
+    industry verticals you flagged on the call: aerospace, medical, and defense. Each templated
+    similarly to the service pillars but with industry-specific positioning, application
+    examples, and qualification framing. All four pages have favorable difficulty-to-volume
+    ratios and a realistic shot at ranking inside the engagement window.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="id">#</th>
+        <th>Page</th>
+        <th class="num">Monthly Vol</th>
+        <th class="num">Difficulty</th>
+        <th>60-Day Outlook</th>
+        <th>Positioning Approach</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="id">01</td><td><strong>Aerospace CNC Machining</strong></td><td class="num">1,000</td><td class="num">26</td><td><span class="pill med">good</span></td><td>Capability + tolerance focus, Seattle 5-axis tie-in</td></tr>
+      <tr><td class="id">02</td><td><strong>Aerospace Sheet Metal Fabrication</strong></td><td class="num">260</td><td class="num">3</td><td><span class="pill easy">strong</span></td><td>Capability + materials focus, aerospace-grade aluminum</td></tr>
+      <tr><td class="id">03</td><td><strong>Medical Investment Casting</strong></td><td class="num">70</td><td class="num">0</td><td><span class="pill easy">strong</span></td><td>Partner-network framing (pending ISO 13485 decision below)</td></tr>
+      <tr><td class="id">04</td><td><strong>Military CNC Machining</strong></td><td class="num">260</td><td class="num">4</td><td><span class="pill easy">strong</span></td><td>Partner-network framing (pending ITAR decision below)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label">Decision required on medical and defense pages</span>
+    On the call you noted that medical and defense work require certifications (ISO 13485, ITAR)
+    that Redstone is moving toward but doesn't currently hold. We have three options for how to
+    approach pages 03 and 04: <strong>(a)</strong> publish with capability-only language and
+    route inquiries through a qualified-partner-network narrative, <strong>(b)</strong> defer
+    publication until certifications are in process or held, or <strong>(c)</strong> publish
+    only the aerospace pages and shelve medical and military until certifications are confirmed.
+    Detail in the Decisions section below.
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section id="milestones">
+  <div class="section-head">
+    <span class="section-num">08 / OUTCOMES</span>
+    <h2>What success looks like</h2>
+  </div>
+  <p class="lede">
+    Realistic expectations across the engagement window and the months that follow. SEO timing
+    is non-linear: most of the work landed in the 60 days produces compounding signal that
+    becomes visible only after Google has crawled, indexed, and evaluated the new site.
+  </p>
+
+  <div class="milestone-grid">
+    <div class="milestone-card">
+      <div class="stage">By Day 30</div>
+      <h3>Foundation live</h3>
+      <ul>
+        <li><strong>Existing 25 pages</strong> with on-page optimization deployed to the current site</li>
+        <li><strong>Briefs and drafts complete</strong> for all 85 pages</li>
+        <li><strong>Technical SEO audit</strong> and algorithm/penalty diagnosis delivered</li>
+        <li><strong>Tracking infrastructure</strong> live and reporting</li>
+        <li>Some early position movement possible on existing pages, but most signal is post-launch</li>
+      </ul>
+    </div>
+    <div class="milestone-card">
+      <div class="stage">By Day 60</div>
+      <h3>New site indexing</h3>
+      <ul>
+        <li><strong>New site launched</strong> with all 85 pages live</li>
+        <li><strong>Redirect map deployed</strong> and validated</li>
+        <li><strong>Google indexing</strong> in progress across all new pages</li>
+        <li><strong>Early ranking signal</strong> on low-difficulty pages (welding, plasma cutting, aerospace sheet metal, military CNC)</li>
+        <li><strong>End-of-sprint diagnostic</strong> with phase 2 recommendation delivered</li>
+      </ul>
+    </div>
+    <div class="milestone-card">
+      <div class="stage">Day 60 — 180</div>
+      <h3>Compounding signal</h3>
+      <ul>
+        <li><strong>Higher-difficulty pillars</strong> (laser cutting, powder coating) begin ranking</li>
+        <li><strong>Country grid</strong> moves to page-one positions for low-competition queries</li>
+        <li><strong>Material content refresh</strong> recovers measurable click volume on high-impression pages</li>
+        <li><strong>US service area</strong> shows ranking signal worth phase 2 investment</li>
+        <li><strong>Industry verticals</strong> begin driving qualified inquiry</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="label">A note on the recovery curve</span>
+    The traffic decline took roughly twelve months to play out. Recovery is on a similar arc —
+    not because the work takes that long, but because Google needs time to re-evaluate the
+    site after structural changes. We expect <strong>positive momentum</strong> visible in
+    the back half of the engagement and accelerating through months three and four. Anyone
+    promising "all traffic back in 60 days" on a site rebuild is overpromising. What we're
+    delivering inside the window is the foundation that compounds.
+  </div>
+</section>
+
+<!-- CONSIDERATIONS -->
+<section id="considerations">
+  <div class="section-head">
+    <span class="section-num">09 / CONTEXT</span>
+    <h2>Considerations and dependencies</h2>
+  </div>
+  <p class="lede">
+    Items worth flagging up front so there are no surprises during the engagement.
+  </p>
+
+  <div class="consider-grid">
+    <div class="consider-card">
+      <div class="label">Dependency · Critical</div>
+      <h3>Site build timing</h3>
+      <p>Most of the new content goes live with Kaz's site launch. If the build slips, the
+      post-launch indexing window inside the engagement compresses. We're working in lock-step
+      with Kaz to maintain the schedule, and the existing-page optimization in Block 02 is
+      structured to ship to the current site immediately so progress is not gated by launch.</p>
+    </div>
+
+    <div class="consider-card">
+      <div class="label">Decision Required</div>
+      <h3>Medical and defense positioning</h3>
+      <p>Pages targeting ISO 13485 or ITAR keywords will attract inbound qualified on those
+      certifications. Until those certs are in process or confirmed, capability-only or
+      partner-network framing protects the brand. Detail in the Decisions section below.</p>
+    </div>
+
+    <div class="consider-card">
+      <div class="label">Industry Trend</div>
+      <h3>AI Overviews on material queries</h3>
+      <p>Some of the material specification SERPs that previously drove your highest-volume
+      traffic are now answered by Google's AI Overview directly above the organic results.
+      A portion of that lost click volume may not be fully recoverable regardless of content
+      quality. The material refresh in Block 05 prioritizes pages where AI Overview has
+      lowest footprint and traditional click capture remains strongest.</p>
+    </div>
+
+    <div class="consider-card">
+      <div class="label">Internal Architecture</div>
+      <h3>Hub and spoke discipline</h3>
+      <p>The site will run three parallel hub-and-spoke structures after launch: existing
+      service hubs and country spokes, new finishing and sheet metal pillars with sub-service
+      spokes, and the US service area hub with city spokes. Internal linking is locked into a
+      predetermined architecture to prevent any of these from cannibalizing the others.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DECISIONS -->
+<section id="decisions">
+  <div class="section-head">
+    <span class="section-num">10 / INPUT</span>
+    <h2>Decisions we need from you</h2>
+  </div>
+  <p class="lede">
+    Resolving these before production begins keeps the schedule on track. Default approach for
+    each is workable, but your input refines the work.
+  </p>
+
+  <div class="decision-list">
+    <div class="item">
+      <div class="num-circle">01</div>
+      <div class="q">
+        <strong>Medical and defense page positioning</strong>
+        <span>How would you like us to approach the medical investment casting and military CNC machining pages, given that ISO 13485 and ITAR certifications are not yet held?</span>
+        <ul class="options">
+          <li>Publish with capability-only language, route inquiries through partner-network framing</li>
+          <li>Defer publication of these two pages until certifications are in process</li>
+          <li>Publish aerospace pages only, shelve medical and military pages for phase 2</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num-circle">02</div>
+      <div class="q">
+        <strong>Service pillar prioritization</strong>
+        <span>The seven pillars currently planned are Welding, Laser Cutting, Metal Finishing, Powder Coating, Plasma Cutting, Tube Bending, and Metal Stamping. Alternates on the bench from the strategy call include Anodizing, Electroplating, Waterjet Cutting, MIG Welding, and TIG Welding. Any swaps you'd like to see?</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num-circle">03</div>
+      <div class="q">
+        <strong>US service area cities</strong>
+        <span>The 5×5 matrix targets Seattle, Los Angeles, Chicago, Phoenix, and Dallas — chosen for breadth of industrial buyer concentration across the major US manufacturing regions. If your sales team sees customer concentration in different cities (e.g., Houston for energy, Charlotte for advanced manufacturing, Boston for medical devices), we can swap in those markets instead.</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num-circle">04</div>
+      <div class="q">
+        <strong>Additional industry verticals</strong>
+        <span>Currently scoped: aerospace, medical, defense. On the call you also mentioned automotive (lower margin, lower priority) and energy / oil & gas as possibilities. Any additional verticals you'd like included before production begins?</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num-circle">05</div>
+      <div class="q">
+        <strong>Brand voice and positioning anchors</strong>
+        <span>Any specific phrasing, customer stories (e.g., the laser etching machine chassis customer you mentioned), or positioning anchors you'd like reflected across the pillar and country pages? These are most valuable to weave in before production rather than as edits after.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPENDIX: KEYWORD UNIVERSE -->
+<section id="universe">
+  <div class="section-head">
+    <span class="section-num">11 / APPENDIX</span>
+    <h2>Keyword universe — strategic reference</h2>
+  </div>
+  <p class="lede">
+    The complete keyword research deliverable underlying the 60-day content plan and the
+    multi-quarter roadmap. <span class="ink">568 keyword clusters</span> representing
+    <span class="ink">1,245 total keywords</span> and <span class="ink">132,910 monthly
+    searches</span>. Each cluster maps to a dedicated page based on SERP analysis showing
+    what Google rewards for that specific search intent — grouping too many keywords onto
+    one page dilutes relevance and depresses rankings. Data sourced from SEMrush, DataForSEO
+    SERP analysis, and competitor gap research.
+  </p>
+
+  <!-- Universe summary -->
+  <div class="totals">
+    <div class="cell scope">
+      <div class="tag">Existing Pages</div>
+      <div class="num">24</div>
+      <div class="sub">Already on the site — optimization targets for traffic recovery</div>
+    </div>
+    <div class="cell scope-add">
+      <div class="tag">P0 Strategic</div>
+      <div class="num">20</div>
+      <div class="sub">Top-priority new pages from your strategy call</div>
+    </div>
+    <div class="cell scope">
+      <div class="tag">P1 Low-Hanging Fruit</div>
+      <div class="num">68</div>
+      <div class="sub">Best difficulty-to-volume ratio — achievable early wins</div>
+    </div>
+    <div class="cell scope-add">
+      <div class="tag">P2 + P3 Roadmap</div>
+      <div class="num">432</div>
+      <div class="sub">315 expansion pages + 117 blog/topical authority pages</div>
+    </div>
+  </div>
+
+  <!-- Priority breakdown summary -->
+  <h3 class="appendix-subhead">Priority Breakdown</h3>
+  <p class="appendix-subhead-desc">
+    How the 568 clusters are tiered for execution. The 60-day sprint addresses all existing pages,
+    a selected subset of P0, and pulls country-specific pages from P1. P2 and P3 represent the
+    multi-quarter content roadmap.
+  </p>
+  <table class="compact">
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th class="num">Pages</th>
+        <th>Description</th>
+        <th>Sprint Coverage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Existing</strong></td><td class="num">24</td><td>Pages on the site now — optimize for recovery</td><td>25 covered in Block 02</td></tr>
+      <tr><td><strong>P0</strong></td><td class="num">20</td><td>Top strategic pages from the May 7 call</td><td>7 pillars + verticals in Blocks 03, 07</td></tr>
+      <tr><td><strong>P1</strong></td><td class="num">68</td><td>Low-hanging fruit — best KD/volume ratio</td><td>13 country pages in Block 04</td></tr>
+      <tr><td><strong>P2</strong></td><td class="num">315</td><td>Expansion pages for long-term growth</td><td>Phase 2 roadmap</td></tr>
+      <tr><td><strong>P3</strong></td><td class="num">117</td><td>Blog content for topical authority</td><td>Phase 2 roadmap</td></tr>
+    </tbody>
+  </table>
+
+  <!-- EXISTING PAGES -->
+  <h3 class="appendix-subhead">Existing Pages <span class="count">24 clusters</span></h3>
+  <p class="appendix-subhead-desc">
+    Pages already live on redstonemanufacturing.com targeting these keywords. Optimization
+    treatment detailed in Block 02. Note that some country spokes show zero direct search
+    volume — these are maintained per your direction to preserve the country grid even where
+    Redstone doesn't have an active partner.
+  </p>
+  <table class="compact">
+    <thead>
+      <tr>
+        <th>Keyword Cluster</th>
+        <th>Type</th>
+        <th class="num">Vol</th>
+        <th class="num">KD</th>
+        <th class="num">CPC</th>
+        <th>Intent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">cnc machining services</td><td>Service Hub</td><td class="num">4,400</td><td class="num"><span class="pill hard">63</span></td><td class="num">$9.21</td><td>Commercial</td></tr>
+      <tr><td class="kw">sheet metal fabrication</td><td>Service Hub</td><td class="num">6,600</td><td class="num"><span class="pill med">38</span></td><td class="num">$4.19</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">plastic injection molding services</td><td>Service Hub</td><td class="num">1,900</td><td class="num"><span class="pill hard">49</span></td><td class="num">$6.10</td><td>Commercial</td></tr>
+      <tr><td class="kw">investment casting services</td><td>Service Hub</td><td class="num">210</td><td class="num"><span class="pill med">25</span></td><td class="num">$7.75</td><td>Commercial</td></tr>
+      <tr><td class="kw">sand casting services</td><td>Service Hub</td><td class="num">260</td><td class="num"><span class="pill med">21</span></td><td class="num">$3.20</td><td>Commercial</td></tr>
+      <tr><td class="kw">metal injection molding services</td><td>Service Hub</td><td class="num">320</td><td class="num"><span class="pill med">20</span></td><td class="num">$14.15</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">aluminum die casting services</td><td>Service Spoke</td><td class="num">110</td><td class="num"><span class="pill med">30</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">zinc die casting services</td><td>Service Spoke</td><td class="num">110</td><td class="num"><span class="pill med">23</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc machining china</td><td>Country Spoke</td><td class="num">480</td><td class="num"><span class="pill easy">19</span></td><td class="num">$5.26</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc machining india</td><td>Country Spoke</td><td class="num">30</td><td class="num"><span class="pill easy">6</span></td><td class="num">$6.32</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">cnc machining mexico</td><td>Country Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">7</span></td><td class="num">$9.40</td><td>Commercial</td></tr>
+      <tr><td class="kw">plastic injection molding china</td><td>Country Spoke</td><td class="num">170</td><td class="num"><span class="pill med">36</span></td><td class="num">$6.40</td><td>Commercial</td></tr>
+      <tr><td class="kw">plastic injection molding mexico</td><td>Country Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">12</span></td><td class="num">$7.17</td><td>Commercial</td></tr>
+      <tr><td class="kw">die casting in india</td><td>Country Spoke</td><td class="num">40</td><td class="num"><span class="pill med">26</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">die casting Mexico</td><td>Country Spoke</td><td class="num">30</td><td class="num"><span class="pill easy">0</span></td><td class="num">$3.99</td><td>Commercial</td></tr>
+      <tr><td class="kw">India investment casting</td><td>Country Spoke</td><td class="num">30</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">China metal injection molding</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">metal injection molding India</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sand casting India</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sand casting Mexico</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">$3.49</td><td>Commercial</td></tr>
+      <tr><td class="kw">China sand casting</td><td>Country Spoke</td><td class="num">40</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sheet metal fabrication mexico</td><td>Country Spoke</td><td class="num">40</td><td class="num"><span class="pill easy">5</span></td><td class="num">$5.49</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">Brazil die casting</td><td>Country Spoke</td><td class="num">0</td><td class="num"><span class="pill easy">4</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">Brazil sand casting</td><td>Country Spoke</td><td class="num">0</td><td class="num"><span class="pill easy">3</span></td><td class="num">—</td><td>Commercial</td></tr>
+    </tbody>
+  </table>
+
+  <!-- P0 STRATEGIC -->
+  <h3 class="appendix-subhead">P0 — Top Strategic Pages <span class="count">20 clusters</span></h3>
+  <p class="appendix-subhead-desc">
+    Highest-priority new pages identified from your May 7 strategy call. Sheet metal sub-services
+    you flagged as missing from the site, the finishes cluster you called "a big opportunity,"
+    the Seattle five-axis facility, and the higher-margin aerospace vertical. These are the
+    keywords behind Blocks 03 (pillars) and 07 (industry verticals), plus the basis for the
+    above-scope Seattle anchor page in Block 06.
+  </p>
+  <table class="compact">
+    <thead>
+      <tr>
+        <th>Keyword Cluster</th>
+        <th>Type</th>
+        <th class="num">Vol</th>
+        <th class="num">KD</th>
+        <th class="num">CPC</th>
+        <th>Strategic Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">welding services</td><td>Service Hub</td><td class="num">1,900</td><td class="num"><span class="pill easy">10</span></td><td class="num">$2.60</td><td>Sheet metal sub-service, very low difficulty</td></tr>
+      <tr><td class="kw">laser cutting service</td><td>Service Hub</td><td class="num">2,400</td><td class="num"><span class="pill med">39</span></td><td class="num">$4.73</td><td>Sheet metal sub-service, highest volume</td></tr>
+      <tr><td class="kw">powder coating services</td><td>Service Hub</td><td class="num">3,600</td><td class="num"><span class="pill hard">41</span></td><td class="num">$2.48</td><td>Highest-volume finish, finishing cluster anchor</td></tr>
+      <tr><td class="kw">aerospace cnc machining</td><td>Service Spoke</td><td class="num">1,000</td><td class="num"><span class="pill med">26</span></td><td class="num">$3.03</td><td>Higher-margin vertical per your call</td></tr>
+      <tr><td class="kw">wire edm machining services</td><td>Service Hub</td><td class="num">590</td><td class="num"><span class="pill med">23</span></td><td class="num">$6.34</td><td>Specialized cutting technique</td></tr>
+      <tr><td class="kw">waterjet cutting services</td><td>Service Hub</td><td class="num">590</td><td class="num"><span class="pill med">27</span></td><td class="num">$4.62</td><td>Sheet metal sub-service you named</td></tr>
+      <tr><td class="kw">metal finishing services</td><td>Service Hub</td><td class="num">480</td><td class="num"><span class="pill hard">46</span></td><td class="num">$3.63</td><td>Umbrella hub for entire finishing cluster</td></tr>
+      <tr><td class="kw">mig welding services</td><td>Service Spoke</td><td class="num">480</td><td class="num"><span class="pill easy">8</span></td><td class="num">—</td><td>Welding type you named, very low KD</td></tr>
+      <tr><td class="kw">plasma cutting services</td><td>Service Hub</td><td class="num">480</td><td class="num"><span class="pill easy">15</span></td><td class="num">$3.65</td><td>Sheet metal sub-service you named</td></tr>
+      <tr><td class="kw">tube bending services</td><td>Service Hub</td><td class="num">480</td><td class="num"><span class="pill easy">20</span></td><td class="num">$4.62</td><td>Sheet metal sub-service you named</td></tr>
+      <tr><td class="kw">tube laser cutting services</td><td>Service Hub</td><td class="num">480</td><td class="num"><span class="pill easy">18</span></td><td class="num">$8.07</td><td>Specialized laser cutting variant</td></tr>
+      <tr><td class="kw">5 axis cnc machining services</td><td>Service Spoke</td><td class="num">390</td><td class="num"><span class="pill med">24</span></td><td class="num">$9.45</td><td>Seattle facility differentiator</td></tr>
+      <tr><td class="kw">anodizing service</td><td>Service Hub</td><td class="num">390</td><td class="num"><span class="pill hard">40</span></td><td class="num">$2.16</td><td>Core finish you named</td></tr>
+      <tr><td class="kw">electroplating services</td><td>Service Hub</td><td class="num">390</td><td class="num"><span class="pill med">31</span></td><td class="num">$1.87</td><td>Finishing cluster, you named</td></tr>
+      <tr><td class="kw">metal stamping services</td><td>Service Hub</td><td class="num">720</td><td class="num"><span class="pill med">37</span></td><td class="num">$6.34</td><td>Stamping + progressive die stamping you named</td></tr>
+      <tr><td class="kw">tig welding services</td><td>Service Spoke</td><td class="num">320</td><td class="num"><span class="pill med">22</span></td><td class="num">$2.20</td><td>Welding type you named</td></tr>
+      <tr><td class="kw">metal enclosure</td><td>Service Spoke</td><td class="num">320</td><td class="num"><span class="pill easy">11</span></td><td class="num">$2.13</td><td>Machine chassis / enclosure work you mentioned</td></tr>
+      <tr><td class="kw">aerospace sheet metal fabrication</td><td>Service Spoke</td><td class="num">260</td><td class="num"><span class="pill easy">3</span></td><td class="num">$3.06</td><td>Easy win in priority margin vertical</td></tr>
+      <tr><td class="kw">wire forming services</td><td>Service Hub</td><td class="num">140</td><td class="num"><span class="pill easy">10</span></td><td class="num">$3.44</td><td>Sheet metal sub-service you named</td></tr>
+      <tr><td class="kw">cnc machining seattle</td><td>Location</td><td class="num">90</td><td class="num"><span class="pill easy">7</span></td><td class="num">—</td><td>Seattle US-based facility anchor</td></tr>
+    </tbody>
+  </table>
+
+  <!-- P1 LOW-HANGING FRUIT -->
+  <h3 class="appendix-subhead">P1 — Low-Hanging Fruit <span class="count">68 clusters</span></h3>
+  <p class="appendix-subhead-desc">
+    Pages with favorable keyword difficulty against monthly volume — achievable early wins
+    that can rank quickly. Most have KD under 20 with three-figure search volume. Includes
+    the country-grid completions, material-service spokes, industry vertical sub-pages, and
+    welding sub-services. Block 04 of the 60-day sprint pulls 13 country pages from this tier.
+  </p>
+  <table class="compact">
+    <thead>
+      <tr>
+        <th>Keyword Cluster</th>
+        <th>Type</th>
+        <th class="num">Vol</th>
+        <th class="num">KD</th>
+        <th class="num">CPC</th>
+        <th>Intent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">cnc machining bronze</td><td>Service Spoke</td><td class="num">2,900</td><td class="num"><span class="pill med">23</span></td><td class="num">$4.99</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">kovar machining services</td><td>Service Spoke</td><td class="num">2,400</td><td class="num"><span class="pill easy">0</span></td><td class="num">$17.35</td><td>Commercial</td></tr>
+      <tr><td class="kw">acrylic cnc machining</td><td>Service Spoke</td><td class="num">1,900</td><td class="num"><span class="pill med">26</span></td><td class="num">$1.01</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc precision machining</td><td>Service Spoke</td><td class="num">1,000</td><td class="num"><span class="pill easy">16</span></td><td class="num">$3.23</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">high volume cnc machining</td><td>Service Spoke</td><td class="num">390</td><td class="num"><span class="pill easy">6</span></td><td class="num">$8.81</td><td>Commercial</td></tr>
+      <tr><td class="kw">robotic welding services</td><td>Service Spoke</td><td class="num">390</td><td class="num"><span class="pill easy">4</span></td><td class="num">$13.41</td><td>Commercial</td></tr>
+      <tr><td class="kw">field welding services</td><td>Service Spoke</td><td class="num">260</td><td class="num"><span class="pill easy">4</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">military cnc machining</td><td>Service Spoke</td><td class="num">260</td><td class="num"><span class="pill easy">4</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">specialized welding services</td><td>Service Spoke</td><td class="num">260</td><td class="num"><span class="pill easy">4</span></td><td class="num">$2.61</td><td>Commercial</td></tr>
+      <tr><td class="kw">metal frame fabrication</td><td>Service Spoke</td><td class="num">260</td><td class="num"><span class="pill easy">4</span></td><td class="num">$2.47</td><td>Commercial</td></tr>
+      <tr><td class="kw">aluminum cnc machining vietnam</td><td>Country Spoke</td><td class="num">210</td><td class="num"><span class="pill easy">14</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">rf welding services</td><td>Service Spoke</td><td class="num">210</td><td class="num"><span class="pill easy">2</span></td><td class="num">$5.29</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc punching services</td><td>Service Spoke</td><td class="num">210</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">railroad machining services</td><td>Service Spoke</td><td class="num">210</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc machining vietnam</td><td>Country Spoke</td><td class="num">170</td><td class="num"><span class="pill easy">20</span></td><td class="num">$8.40</td><td>Commercial</td></tr>
+      <tr><td class="kw">cold chamber die casting</td><td>Service Spoke</td><td class="num">170</td><td class="num"><span class="pill easy">1</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">metal enclosure with din rail inside</td><td>Service Spoke</td><td class="num">170</td><td class="num"><span class="pill easy">2</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sg iron casting</td><td>Service Spoke</td><td class="num">140</td><td class="num"><span class="pill easy">0</span></td><td class="num">$3.38</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">aerospace metal finishing services</td><td>Service Spoke</td><td class="num">140</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">china die casting</td><td>Country Spoke</td><td class="num">110</td><td class="num"><span class="pill easy">18</span></td><td class="num">$2.62</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc turret punching services</td><td>Service Spoke</td><td class="num">110</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">cobalt based investment casting</td><td>Service Spoke</td><td class="num">110</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">spot welding services</td><td>Service Spoke</td><td class="num">110</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">oil and gas cnc machining</td><td>Service Spoke</td><td class="num">110</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">a356 investment casting</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">cast iron machining services</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">china cnc turning</td><td>Country Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">15</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">carbon steel investment casting</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">cnc inspection services</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc lathe china</td><td>Country Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">10</span></td><td class="num">$5.08</td><td>Transactional</td></tr>
+      <tr><td class="kw">cnc machining for heavy truck industry</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">cnc machining for mining industry</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc machining for transportation industry</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc quality control services</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">general machining services</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">$3.04</td><td>Commercial</td></tr>
+      <tr><td class="kw">lost wax casting services</td><td>Service Spoke</td><td class="num">90</td><td class="num"><span class="pill easy">0</span></td><td class="num">$1.56</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">ar 550 steel plate machining</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">aluminium gravity die casting</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">contract welding services</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">ductile iron investment casting</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">gas welding mig mag service</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">$0.17</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">medical investment casting</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">medical metal finishing services</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">metal finishing services for military industry</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">oem investment casting</td><td>Service Spoke</td><td class="num">70</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">plastic injection molding malaysia</td><td>Country Spoke</td><td class="num">70</td><td class="num"><span class="pill med">31</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">precision die casting malaysia</td><td>Country Spoke</td><td class="num">70</td><td class="num"><span class="pill med">25</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">17-4 investment casting</td><td>Service Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">ams 2424 sulfamate nickel plating</td><td>Service Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">astm b689 nickel plating services</td><td>Service Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">3</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">black zinc barrel plating services</td><td>Service Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">boeing anodizing services</td><td>Service Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">clear zinc barrel plating services</td><td>Service Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">7</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">outsource die casting vietnam</td><td>Country Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sheet metal fabrication china</td><td>Country Spoke</td><td class="num">50</td><td class="num"><span class="pill easy">17</span></td><td class="num">$3.75</td><td>Info+Commercial</td></tr>
+      <tr><td class="kw">aluminum die casting china</td><td>Country Spoke</td><td class="num">40</td><td class="num"><span class="pill easy">5</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sheet metal fabrication in india</td><td>Country Spoke</td><td class="num">40</td><td class="num"><span class="pill easy">4</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sheet metal fabrication malaysia</td><td>Country Spoke</td><td class="num">40</td><td class="num"><span class="pill easy">20</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">china investment casting</td><td>Country Spoke</td><td class="num">30</td><td class="num"><span class="pill easy">0</span></td><td class="num">$5.39</td><td>Commercial</td></tr>
+      <tr><td class="kw">cnc machining brazil</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">foundries in mexico</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">3</span></td><td class="num">$4.13</td><td>Commercial</td></tr>
+      <tr><td class="kw">foundry in india</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">$36.59</td><td>Commercial</td></tr>
+      <tr><td class="kw">investment casting brazil</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">investment casting mexico</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">plastic injection molding india</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">brazil foundry</td><td>Country Spoke</td><td class="num">20</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">metal injection molding mexico</td><td>Country Spoke</td><td class="num">10</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">metal injection molding brazil</td><td>Country Spoke</td><td class="num">0</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">plastic injection molding brazil</td><td>Country Spoke</td><td class="num">0</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+      <tr><td class="kw">sheet metal fabrication brazil</td><td>Country Spoke</td><td class="num">0</td><td class="num"><span class="pill easy">0</span></td><td class="num">—</td><td>Commercial</td></tr>
+    </tbody>
+  </table>
+
+  <!-- P2/P3 ROADMAP -->
+  <h3 class="appendix-subhead">P2 + P3 — Expansion &amp; Topical Authority <span class="count">432 clusters</span></h3>
+  <p class="appendix-subhead-desc">
+    The long-term keyword footprint. Listed here in summary form rather than full detail given
+    the scale. Full keyword-level data with sub-keywords and competitive analysis is maintained
+    in the working keyword universe document linked below.
+  </p>
+
+  <div class="consider-grid">
+    <div class="consider-card">
+      <div class="label">P2 · Expansion · 315 pages</div>
+      <h3>Service and material depth</h3>
+      <p>Service-specific spokes that deepen each pillar's content cluster (e.g., 5-axis
+      waterjet, 6-axis laser, specific welding types). Material-service combinations
+      (e.g., abs cnc machining, copper laser cutting, brass investment casting). Industry
+      vertical sub-pages beyond the four in Block 07 (automotive, energy, agricultural,
+      marine, transportation). Surface treatment variants (chromate, e-coating, black oxide,
+      gold anodizing, hard anodizing).</p>
+      <p><strong>Estimated timing:</strong> Quarters 2–4 of phase 2 engagement.</p>
+    </div>
+
+    <div class="consider-card">
+      <div class="label">P3 · Topical Authority · 117 pages</div>
+      <h3>Blog and reference content</h3>
+      <p>Comparison articles ("die casting vs investment casting," "aluminum vs titanium"),
+      buyer guides, cost analysis content, process explainers, material selection guides,
+      and quality standard references. Lower individual conversion intent than commercial
+      pages but high cumulative ranking value — these support the commercial pages through
+      internal linking and build domain authority.</p>
+      <p><strong>Estimated timing:</strong> Rolling cadence through phase 2 — 4–6 pages per
+      month sustained.</p>
+    </div>
+  </div>
+
+  <a href="https://teamoutriderdigital.github.io/redstone-seo-research/keyword-universe.html" class="universe-link" target="_blank" rel="noopener">View Full Keyword Universe →</a>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-sig">
+  <span>Outrider Digital · 60-Day SEO Sprint Plan</span>
+  <em>Foundation today. Compounding tomorrow.</em>
+  <span>May 13, 2026 · v1</span>
+</div>
+
+</div>
+</body>
+</html>
